@@ -1,0 +1,9 @@
+basePath: /api/v1
+host: localhost:3000
+info:
+  contact: {}
+  description: API in Go for work queue pattern
+  title: Tag Task API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
