@@ -41,10 +41,7 @@ func (s server) Start() {
 	s.setupSwagger()
 	s.setupMiddlewares()
 	s.registerRoutes()
-
-	//s.router.Run()
 	s.startGracefulShutdown()
-
 }
 
 func (s server) setupServer() {
@@ -60,8 +57,8 @@ func (s server) setupMiddlewares() {
 }
 
 func (s server) setupSwagger() {
-	s.router.StaticFile("/swagger.json", "./docs/swagger.json")
-	s.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	url := ginSwagger.URL("http://localhost:3000/swagger/doc.json")
+	s.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 }
 
 func (s server) startGracefulShutdown() {

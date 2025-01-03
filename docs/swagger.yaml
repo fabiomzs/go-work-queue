@@ -1,9 +1,75 @@
 basePath: /api/v1
+definitions:
+  handler.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  handler.TaskResponse:
+    properties:
+      data:
+        type: string
+      message:
+        type: string
+    type: object
 host: localhost:3000
 info:
-  contact: {}
-  description: API in Go for work queue pattern
+  contact:
+    name: Fabio Muniz
+    url: http://fabiomuniz.com.br
+  description: API in Go for Work Queue Pattern PoC
+  license:
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
   title: Tag Task API
   version: "1.0"
-paths: {}
+paths:
+  /tasks:
+    get:
+      consumes:
+      - application/json
+      description: List all valid tasks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.TaskResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List all tasks
+      tags:
+      - Tasks
+  /tasks/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get task by id
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.TaskResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get task by id
+      tags:
+      - Tasks
+schemes:
+- http
 swagger: "2.0"
